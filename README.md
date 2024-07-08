@@ -1,70 +1,45 @@
-# Getting Started with Create React App
+# kintone React アプリケーション
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+このプロジェクトは、kintone上でReactを使用してカスタムアプリケーションを構築するためのサンプルです。現在は、詳細画面にシンプルなボタンを配置するデモンストレーションのみです。
 
-## Available Scripts
+## 機能
 
-In the project directory, you can run:
+- kintoneの詳細画面にカスタムボタンを表示
+- Reactの最新バージョン（v18以降）を使用
 
-### `npm start`
+## セットアップ
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1. このリポジトリをクローンまたはダウンロードします。
+2. プロジェクトディレクトリで `npm install` を実行し、依存関係をインストールします。
+3. `npm run build` を実行してプロジェクトをビルドします。
+4. 生成された JavaScript ファイルを kintone アプリケーションの設定画面でアップロードします。
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## kintoneでReactを動作させるための設定
 
-### `npm test`
+kintone環境でReactを動作させるためには、通常のReactとは異なる設定があります：
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. kintoneのイベント (`kintone.events.on`) を使用して、Reactアプリケーションのレンダリングのタイミングを制御する。
+2. kintoneが提供する特定の要素（例：`kintone.app.record.getHeaderMenuSpaceElement()`）にReactコンポーネントをレンダリングする。
+3. 複数回のレンダリングを防ぐため、レンダリング前に既存の子要素をクリアする。
 
-### `npm run build`
+## 標準のReactとの主な違い
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. エントリーポイント：標準のReactアプリケーションでは通常 `index.js` または `index.tsx` ですが、kintone環境では kintone のイベントハンドラ内でアプリケーションを初期化する。
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. ルート要素：標準では通常 `index.html` 内の（`<div id="root"></div>`等）がルート要素だが、kintone環境では動的に作成した要素をルート要素として使用します。
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+3. レンダリングタイミング：標準のReactアプリケーションでは通常ページロード時に一度だけレンダリングしますが、kintone環境では特定のイベント（例：詳細画面の表示）が発生するたびにレンダリングする必要があります。
 
-### `npm run eject`
+4. グローバルオブジェクト：kintone環境では `kintone` というグローバルオブジェクトが利用可能。（eslintrc.jsにグローバルオブジェクトを定義）
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 注意事項
+このプロジェクトはデモンストレーション目的のサンプルです。実際の運用環境で使用する際は、セキュリティやパフォーマンスの観点から追加の考慮が必要になる場合があります。
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## その他
+問題の報告や改善提案は、Issueからお願いします。
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## ライセンス
+[MITライセンス](LICENSE)の下で公開されています。
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
